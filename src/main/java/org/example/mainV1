@@ -1,0 +1,47 @@
+package org.example;
+
+import javax.swing.*;
+
+public class Main {
+    public static void main(String[] args) {
+        // Roman numerals and their corresponding values
+        String[] romanValues = {"M", "D", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int[] arabicValues = {1000, 500, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        while (true) {
+                
+            
+            int userInp = 0;
+
+            // Get user input and validate it
+            try {
+                String input = JOptionPane.showInputDialog("Enter a numerical value between 1 and 5999:");
+                if (input == null) return; // Cancelled
+                userInp = Integer.parseInt(input);
+
+                if (userInp < 1 || userInp > 5999) {
+                    JOptionPane.showMessageDialog(null, "Invalid value. Range is 1 to 5999.");
+                    return;
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error: Please enter a valid integer.");
+                return;
+            }
+
+            // Convert to Roman numeral
+            StringBuilder output = new StringBuilder();
+            int i = 0;
+            while (userInp > 0) {
+                if (userInp >= arabicValues[i]) {
+                    output.append(romanValues[i]);
+                    userInp -= arabicValues[i];
+                } else {
+                    i++;
+                }
+            }
+
+            // Display result
+            JOptionPane.showMessageDialog(null, "Roman numeral: " + output);
+        }
+    }
+}
